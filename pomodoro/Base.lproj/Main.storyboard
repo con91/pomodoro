@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -24,7 +24,7 @@
                                 <rect key="frame" x="52" y="534" width="62" height="62"/>
                                 <state key="normal" image="Icon_sound_on_normal.png"/>
                                 <connections>
-                                    <action selector="startButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wva-g9-b09"/>
+                                    <action selector="resetBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Ba-Ob-mZY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFm-cM-6qR">
@@ -35,10 +35,16 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G62-lx-EsC">
                                 <rect key="frame" x="240" y="534" width="108" height="62"/>
                                 <state key="normal" image="Icon_refresh_normal.png"/>
+                                <connections>
+                                    <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iFl-Fj-bBS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNc-Vg-YKg">
                                 <rect key="frame" x="147" y="524" width="83" height="83"/>
                                 <state key="normal" image="Icon_play_normal.png"/>
+                                <connections>
+                                    <action selector="playPauseBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6SR-uN-Qw0"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="25:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKp-Ka-wU2">
                                 <rect key="frame" x="62" y="251" width="251" height="88"/>
@@ -60,8 +66,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="playPauseBtn" destination="RNc-Vg-YKg" id="qJo-fE-RaW"/>
                         <outlet property="pomodoroTimeLabel" destination="dKp-Ka-wU2" id="ruF-Lt-NXM"/>
-                        <outlet property="startButton" destination="Dcp-Jy-z2N" id="ItA-yd-XPM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

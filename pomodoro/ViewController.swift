@@ -11,20 +11,32 @@ import UIKit
 class ViewController: UIViewController {
     
     var timer: NSTimer?
+    var running = false
     
-    @IBAction func startButton(sender: AnyObject) {
-    timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target:self, selector: Selector("updatePomodoroTime"), userInfo: nil, repeats: true)
-   }
 
+    @IBAction func playPauseBtn(sender: AnyObject) {
+        
+        if running == false{
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("decreaseTimer"), userInfo: nil, repeats: true)
+        running == true
+        sender.setImage(UIImage(named: "Icon_play_normal@2x.png"), forState: .Normal)
+        }
+        else {
+            timer?.invalidate()
+            running == false
+            sender.setImage(UIImage(named: "Icon_pause_normal@2x.png"), forState: .Selected)
+        }
+    }
     
-    @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var pauseBtn: UIButton!
+    @IBAction func resetBtn(sender: AnyObject) {
+        timer?.invalidate()
+    }
     
     @IBOutlet weak var resetBtn: UIButton!
     
     @IBOutlet weak var pomodoroTimeLabel: UILabel!
     
-    var pomodoroTime = timeElapsed(interval:1500.0)
+    var pomodoroTime =  1500 //timeElapsed(interval:1500.0)
     
     
     override func viewDidLoad() {
