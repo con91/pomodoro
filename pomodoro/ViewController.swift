@@ -24,17 +24,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var pomodoroTimeLabel: UILabel!
     
-    var pomodoroTime: Double = 25000
-    
+    var pomodoroTime = timeElapsed(interval:1500.0)
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         pomodoroTimeLabel.text = String(pomodoroTime)
-        let time = timeElapsed(pomodoroTime)
-        time.minutes
-        time.seconds
     }
     
     func updatePomodoroTime() {
