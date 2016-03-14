@@ -10,46 +10,47 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var timer: NSTimer?
-    var running = false
     
+    let pomodoro = Pomodoro()
 
-    @IBAction func playPauseBtn(sender: AnyObject) {
+    @IBAction func playPauseBtn(sender: UIButton) {
+        if pomodoro.isRunning {
+            pomodoro.pause()
+            sender.setImage(UIImage(named: "Icon_play_normal@2x.png"), forState: .Normal)
+        } else {
+            pomodoro.start()
+            sender.setImage(UIImage(named: "Icon_pause_normal@2x.png"), forState: .Normal)
+        }
         
-        if running == false{
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("decreaseTimer"), userInfo: nil, repeats: true)
-        running == true
-        sender.setImage(UIImage(named: "Icon_play_normal@2x.png"), forState: .Normal)
-        }
-        else {
-            timer?.invalidate()
-            running == false
-            sender.setImage(UIImage(named: "Icon_pause_normal@2x.png"), forState: .Selected)
-        }
+ 
     }
     
+    
     @IBAction func resetBtn(sender: AnyObject) {
-        timer?.invalidate()
+        
     }
     
     @IBOutlet weak var resetBtn: UIButton!
     
     @IBOutlet weak var pomodoroTimeLabel: UILabel!
     
-    var pomodoroTime =  1500 //timeElapsed(interval:1500.0)
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        pomodoroTimeLabel.text = String(pomodoroTime)
+        pomodoroTimeLabel.text = String(pomodoro.seconds)
+        
+        pomodoro.onTimerFired = { [unowned self] (timerLabelText) in
+            print(timerLabelText)
+            self.pomodoroTimeLabel.text = timerLabelText
+        }
     }
     
     func updatePomodoroTime() {
-        if (pomodoroTime >= 0)
+        if (pomodoro.seconds >= 0)
         {
-            pomodoroTimeLabel.text = String(pomodoroTime--)
+            pomodoroTimeLabel.text = String(pomodoro.seconds--)
         }
     }
     
@@ -67,3 +68,32 @@ class ViewController: UIViewController {
     }
 }
 
+class Pomodoro: NSObject {
+    
+    var timer: NSTimer?
+    var onTimerFired: ((timerLabelText: String)->Void)?
+    var isRunning: Bool = false
+    var seconds: Double = 1500.0
+    
+    func start() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updatePomodoroTime"), userInfo: nil, repeats: true)
+        isRunning = true
+    }
+    
+    func pause() {
+        timer?.invalidate()
+    }
+    
+    func updatePomodoroTime() {
+        if let onTimerFired = onTimerFired {
+            let minAndSec = minutesAndSeconds()
+            let string = "\(minAndSec.minutes):\(minAndSec.seconds)"
+            onTimerFired(timerLabelText: string)
+        }
+    }
+    
+    func minutesAndSeconds() -> (minutes: Int, seconds: Int) {
+        
+    }
+    
+}
